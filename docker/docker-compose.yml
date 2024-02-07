@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    %%service%%:
+        image: 127.0.0.1:5000/moby/%%app%%-%%service%%
+        deploy:
+            mode: replicated
+            replicas: 2
+            placement:
+                max_replicas_per_node: 1
+            labels:
+                traefik.enable: 'true'
+                traefik.http.routers.%%app%%-%%service%%.entrypoints: 'websecure'
+                traefik.http.routers.%%app%%-%%service%%.rule: "Host(`FQDN.it`)"
+                traefik.http.routers.%%app%%-%%service%%.middlewares: "gzip@file, whitelist-micso@file" # se accesso solo dalla rete micso
+                traefik.http.services.%%app%%-%%service%%.loadbalancer.server.port: '80'
+                traefik.http.services.%%app%%-%%service%%.loadbalancer.server.scheme: 'http'
+                traefik.http.routers.%%app%%-%%service%%.tls: 'true'
+        hostname: "{{.Service.Name}}-{{.Node.Hostname}}"
+        environment:
+            DOCKER_TASK_SLOT: "{{.Task.Slot}}" 
+            NODE_ENV: "production"

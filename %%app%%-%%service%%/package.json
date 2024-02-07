@@ -4,13 +4,19 @@
   "type": "module",
   "version": "0.1.0",
   "main": "src/app.ts",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "build": "npm run copy && tsc",
     "clean": "rimraf ./dist",
     "copy": "copyfiles -u 1 \"src/**/*.cjs\" dist",
+    "dev": "npm run builds && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch\" \"npm:dev:start\"",
+    "dev:start": "fastify start --ignore-watch=.ts$ -w -o -l info -P dist/app.js",
     "test": "tap -j1 --allow-incomplete-coverage \"./test/**/*.test.?(c)[tj]s\"",
     "lint": "eslint \"src/**/*.[jt]s?(x)\" \"test/**/*.?(c)[jt]s\"",
     "lint:fix": "npm run lint -- --fix",
+    "start": "npm run build && fastify start -l info dist/app.js",
     "watch": "npm run copy && tsc -b -v -i -w"
   },
   "author": "Emiliano Bruni <info@ebruni.it>",
@@ -23,6 +29,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "fastify": "^4.26.0",
+    "@fastify/autoload": "^5.8.0",
+    "@fastify/sensible": "^5.5.0",
+    "close-with-grace": "^1.2.0",
+    "dotenv": "^16.4.1",
+    "fastify-cli": "^6.1.0",
     "fastify-plugin": "^4.5.1"
   },
   "devDependencies": {

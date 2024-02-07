@@ -2,7 +2,15 @@ version: '3.8'
 
 services:
     %%service%%:
-        image: %%app%%-%%service%%
+        image: 127.0.0.1:5000/moby/%%app%%-%%service%%
+        build: 
+            context: ../%%app%%-%%service%%
+            dockerfile: ../docker/%%service%%/Dockerfile
+            args:
+                - IDIR=%%app%%-%%service%%
+                #- BMODE=production # default development on Dockerfile
+    %%service%%_date:
+        image: 127.0.0.1:5000/moby/%%app%%-%%service%%:${DOCKER_DATE}
         build: 
             context: ../%%app%%-%%service%%
             dockerfile: ../docker/%%service%%/Dockerfile

@@ -4,3 +4,4 @@ networks:
     default:
         external: true
         # set name in branch
+        name: mcs-net
