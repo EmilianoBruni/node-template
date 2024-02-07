@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+    %%service%%:
+        image: %%app%%-%%service%%
+        build: 
+            context: ../%%app%%-%%service%%
+            dockerfile: ../docker/%%service%%/Dockerfile
+            args:
+                - IDIR=%%app%%-%%service%%
+                #- BMODE=production # default development on Dockerfile
