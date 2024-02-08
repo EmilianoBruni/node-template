@@ -38,10 +38,10 @@ RUN [ -e pnpm-lock.yaml ] && pnpm install --frozen-lockfile || pnpm install
 FROM base AS builder
 ARG IDIR
 WORKDIR /ws/${IDIR}
-COPY . ./
-COPY --from=deps ws/${IDIR}/pnpm-lock.yaml* .
-COPY --from=deps ws/${IDIR}/node_modules ./node_modules
-#RUN pnpm run build
+COPY --chown=node:node . ./
+COPY --chown=node:node --from=deps ws/${IDIR}/pnpm-lock.yaml* .
+COPY --chown=node:node --from=deps ws/${IDIR}/node_modules ./node_modules
+RUN pnpm run build
 
 # 04a - Production image, copy all the files and run next
 FROM base AS runner
@@ -53,6 +53,8 @@ WORKDIR /ws/${IDIR}
 LABEL org.opencontainers.image.authors="Bruni Emiliano <info@ebruni.it>"
 LABEL org.opencontainers.image.version=1.0
 
-COPY --from=builder ws/${IDIR}/. .
+COPY --from=builder ws/${IDIR}/dist ./dist
+COPY --from=builder ws/${IDIR}/node_modules ./node_modules
+COPY --from=builder ws/${IDIR}/package.json ws/${IDIR}/pnpm-lock.yaml* ./
 
 CMD [""]
