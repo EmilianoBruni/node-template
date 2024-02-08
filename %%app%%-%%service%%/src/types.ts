@@ -1,5 +1,11 @@
 import type { AutoloadPluginOptions } from '@fastify/autoload';
 
+declare module 'fastify' {
+    interface FastifyInstance {
+        config: typeof config;
+    }
+}
+
 export type AppOptions = {
     trustProxy: boolean;
     logger:
