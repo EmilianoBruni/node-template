@@ -57,4 +57,4 @@ COPY --from=builder ws/${IDIR}/dist ./dist
 COPY --from=builder ws/${IDIR}/node_modules ./node_modules
 COPY --from=builder ws/${IDIR}/package.json ws/${IDIR}/pnpm-lock.yaml* ./
 
-CMD ["pm2-runtime", "start", "dist/configs/pm2.config.js"]
+CMD ["pm2-runtime", "start", "dist/configs/pm2.config.cjs"]
