@@ -47,7 +47,7 @@ RUN pnpm run build
 FROM base AS runner
 ARG IDIR
 ARG BMODE
-ENV NODE_ENV=${BMODE} APP=%%app%% SERVICE=%%service%%
+ENV NODE_ENV=${BMODE} APP=%%app%% SERVICE=%%service%% NEXT_TELEMETRY_DISABLED=1 PORT=80
 WORKDIR /ws/${IDIR}
 
 LABEL org.opencontainers.image.authors="Bruni Emiliano <info@ebruni.it>"
@@ -57,4 +57,4 @@ COPY --from=builder ws/${IDIR}/dist ./dist
 COPY --from=builder ws/${IDIR}/node_modules ./node_modules
 COPY --from=builder ws/${IDIR}/package.json ws/${IDIR}/pnpm-lock.yaml* ./
 
-CMD [""]
+CMD ["pm2-runtime", "start", "dist/configs/pm2.config.js"]
