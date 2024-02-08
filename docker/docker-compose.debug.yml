@@ -14,7 +14,7 @@ services:
         deploy:
             resources:
                 limits:
-                    cpus: 2
+                    cpus: '2'
 volumes:
     modules:
     pnpm-store:
