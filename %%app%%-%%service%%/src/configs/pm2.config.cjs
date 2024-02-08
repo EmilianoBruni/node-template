@@ -7,7 +7,7 @@ module.exports = {
     apps: [
         {
             name: "apimac-www",
-            script: "server.js",
+            script: "dist/server.js",
             autorestart: true,
             max_memory_restart: "1G",
             exec_mode: "cluster",
