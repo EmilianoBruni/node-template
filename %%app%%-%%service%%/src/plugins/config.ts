@@ -3,7 +3,8 @@ import fp from 'fastify-plugin';
 
 export default fp(
     async app => {
-        app.decorate('config', config).ready(err => {
+        app.decorate('config', config);
+        app.ready(err => {
             if (err) throw err;
         });
     },
