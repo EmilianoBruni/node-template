@@ -6,6 +6,6 @@
     "docker/docker-compose.debug.yml"
 ],
 "service": "%%SERVICE%%",
-"workspaceFolder": "/ws/%%APP%%-%%SERVICE%%",
+"workspaceFolder": "/ws/dev",
 "initializeCommand": "echo Initialize...." // this is a workaround for a bug, remove if it works well without it
 }

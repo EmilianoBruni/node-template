@@ -7,5 +7,5 @@ services:
             context: ../%%app%%-%%service%%
             dockerfile: ../docker/%%service%%/Dockerfile
             args:
-                - IDIR=%%app%%-%%service%%
+                - IDIR=dev
                 #- BMODE=production # default development on Dockerfile
