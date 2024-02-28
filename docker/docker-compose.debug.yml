@@ -4,13 +4,15 @@ services:
     %%service%%:
         image: %%app%%-%%service%%
         volumes:
-            - ../%%app%%-%%service%%:/ws/%%app%%-%%service%%:cached
-            - modules:/ws/%%app%%-%%service%%/node_modules 
+            - ../:/ws/dev:cached
+            - modules:/ws/dev/%%app%%-%%service%%/node_modules 
             - pnpm-store:/home/node/pnpm/store
         command: sleep infinity
         hostname: "debug-{{.Service.Name}}-{{.Node.Hostname}}"
         environment:
             NODE_ENV: "development"
+        env_file:
+            - ../.env
         deploy:
             resources:
                 limits:
