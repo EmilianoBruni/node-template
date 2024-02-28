@@ -1,11 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
-"name": "%%APP%%",
+"name": "%%APP%%-%%SERVICE%%",
 "dockerComposeFile": [
     "docker/docker-compose.build.yml",
     "docker/docker-compose.debug.yml"
 ],
 "service": "%%SERVICE%%",
-"workspaceFolder": "/ws/${localWorkspaceFolderBasename}",
+"workspaceFolder": "/ws/%%APP%%-%%SERVICE%%",
 "initializeCommand": "echo Initialize...." // this is a workaround for a bug, remove if it works well without it
 }
