@@ -53,8 +53,8 @@ WORKDIR /ws/${IDIR}
 LABEL org.opencontainers.image.authors="Bruni Emiliano <info@ebruni.it>"
 LABEL org.opencontainers.image.version=1.0
 
-COPY --from=builder ws/\${IDIR}/dist ./dist
-COPY --from=builder ws/\${IDIR}/node_modules ./node_modules
-COPY --from=builder ws/\${IDIR}/package.json ws/${IDIR}/pnpm-lock.yaml* ./
+COPY --from=builder /ws/${IDIR}/dist ./dist
+COPY --from=builder /ws/${IDIR}/node_modules ./node_modules
+COPY --from=builder /ws/${IDIR}/package.json ws/${IDIR}/pnpm-lock.yaml* ./
 
 CMD [""]
