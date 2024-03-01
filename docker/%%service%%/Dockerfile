@@ -10,7 +10,6 @@ ARG IDIR
 ENV PNPM_HOME="/pnpm" PATH="/pnpm:$PATH" TZ="Europe/Rome"
 RUN apk add --no-cache tzdata sudo shadow git && \
     corepack enable && \
-    pnpm install -g pm2 && \
     # cosi da far si che l'utente node del container abbia lo stesso id dell'utente bruni 
     # per il debug quando montiamo il filesystem del container con quello dell'host
     usermod -u 1001 node && groupmod -g 1001 node && \
