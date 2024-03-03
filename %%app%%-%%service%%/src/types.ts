@@ -1,3 +1,4 @@
+import type config from './configs/app.config.js';
 import type { AutoloadPluginOptions } from '@fastify/autoload';
 
 declare module 'fastify' {
