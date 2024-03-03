@@ -11,7 +11,7 @@
     "build": "npm run copy && tsc",
     "clean": "rimraf ./dist",
     "copy": "copyfiles -u 1 \"src/**/*.cjs\" dist",
-    "dev": "npm run builds && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch\" \"npm:dev:start\"",
+    "dev": "npm run build && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch\" \"npm:dev:start\"",
     "dev:start": "fastify start --ignore-watch=.ts$ -w -o -l info -P dist/app.js",
     "test": "tap -j1 --allow-incomplete-coverage \"./test/**/*.test.?(c)[tj]s\"",
     "lint": "eslint \"src/**/*.[jt]s?(x)\" \"test/**/*.?(c)[jt]s\"",
